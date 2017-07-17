@@ -1,0 +1,13 @@
+{
+  "name": "projectmanagers Heroku Login App",
+  "description": "projectmanagers Heroku Login App",
+  "keywords": [
+    "projectmanagers",
+    "python",
+    "sample"
+  ],
+  "repository": "	https://github.com/stoic1979/ProjectManager.git",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
