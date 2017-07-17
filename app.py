@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, render_template
 from functools import wraps
 from wtforms.fields import SelectField
 from db import Mdb
@@ -33,7 +33,8 @@ def token_required(f):
 
 @app.route('/')
 def home():
-    return 'Welcome to Heroku Server'
+    templateData = {'title': 'Login PAge'}
+    return render_template('home.html', **templateData)
 
 # its for testing
 @app.route('/protected')
