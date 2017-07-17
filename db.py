@@ -4,9 +4,10 @@ import traceback
 
 class Mdb:
     def __init__(self):
-        conn_str = "mongodb://admin:123@127.0.0.1:27017/admin"
+        # conn_str = "mongodb://admin:123@127.0.0.1:27017/admin"
+        conn_str = 'mongodb://pmuser:pmpass@ds161742.mlab.com:61742/projectmanager'
         client = MongoClient(conn_str)
-        self.db = client['porjectmanager']
+        self.db = client['projectmanager']
 
     def register(self, company_name, company_email, manager_username, password, confirm_password):
         try:
