@@ -6,7 +6,7 @@
     "python",
     "sample"
   ],
-  "repository": "	https://github.com/stoic1979/ProjectManager.git",
+  "repository": "https://github.com/stoic1979/ProjectManager.git",
   "addons": [
     "heroku-postgresql"
   ]
