@@ -12,7 +12,6 @@ itsdangerous==0.24
 Jinja2==2.9.6
 jwt==0.5.2
 MarkupSafe==1.0
-post==0.0.0
 public==0.0.0
 pyasn1==0.2.3
 pycparser==2.18
