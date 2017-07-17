@@ -31,7 +31,11 @@ def token_required(f):
     return decorated
 
 
-#its for testing
+@app.route('/')
+def home():
+    return 'Welcome to Heroku Server'
+
+# its for testing
 @app.route('/protected')
 @token_required
 def protected():
@@ -39,10 +43,8 @@ def protected():
 
 
 @app.route('/unprotected')
-
 def unprotected():
     return 'unprotected'
-
 
 
 @app.route('/register', methods=['POST'])
