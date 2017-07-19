@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, render_template
+from flask import Flask, request, make_response, render_template, jsonify
 from functools import wraps
 from wtforms.fields import SelectField
 from db import Mdb
@@ -33,8 +33,14 @@ def token_required(f):
 
 @app.route('/')
 def home():
-    templateData = {'title': 'Login PAge'}
-    return render_template('home.html', **templateData)
+    templateData = {'title': 'Signup Page'}
+    return render_template('index.html', **templateData)
+
+
+@app.route('/signin')
+def signin():
+    templateData = {'title': 'Signin Page'}
+    return render_template('signin.html', **templateData)
 
 # its for testing
 @app.route('/protected')
@@ -50,7 +56,6 @@ def unprotected():
 
 @app.route('/register', methods=['POST'])
 def register():
-    ret = {}
     try:
         company_name = request.form['company_name']
         company_email = request.form['company_email']
@@ -59,22 +64,19 @@ def register():
         confirm_password =request.form['confirm_password']
         if password == confirm_password:
             mdb.register(company_name, company_email, manager_username, password, confirm_password)
-            ret['error'] = 0
-            ret['msg'] = 'Manager Registered Successfully'
-        else:
-            ret['error'] = 1
-            ret['msg'] = 'password is not match'
+            print('User is added successfully')
+            templateData = {'title': 'Signin Page'}
     except Exception as exp:
-        ret['error'] = 2
-        ret['msg'] = exp
+        print('add_user() :: Got exception: %s' % exp)
         print(traceback.format_exc())
-    return json.dumps(ret)
+    return render_template('index.html', **templateData)
 
 
 @app.route('/login', methods=['POST'])
 def login():
     ret = {}
     try:
+
         company_email = request.form['company_email']
         password = request.form['password']
         if mdb.user_exists(company_email, password):
@@ -89,6 +91,7 @@ def login():
             ret['msg'] = 'Login Successfull'
             ret['error'] = 0
             ret['token'] = token.decode('UTF-8')
+            templateData = {'title' : 'singin page'}
         else:
             ret['msg'] = 'Login failed'
             ret['error'] = 1
@@ -96,7 +99,8 @@ def login():
         ret['msg'] = '%s' % exp
         ret['error'] = 1
         print(traceback.format_exc())
-    return json.dumps(ret)
+    # return jsonify(ret)
+    return render_template('home.html', **templateData)
 
 
 if __name__ == '__main__':
