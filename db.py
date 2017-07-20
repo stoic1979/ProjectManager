@@ -9,7 +9,8 @@ class Mdb:
         client = MongoClient(conn_str)
         self.db = client['projectmanager']
 
-    def register(self, company_name, company_email, manager_username, password, confirm_password):
+    def register(self, company_name, company_email,
+                 manager_username, password, confirm_password):
         try:
             rce = {
                 'company_name': company_name,
@@ -20,7 +21,7 @@ class Mdb:
             }
             self.db.company_manager.insert(rce)
         except Exception as exp:
-            print('register() :: Got exception: %s' %exp)
+            print('register() :: Got exception: %s' % exp)
             print(traceback.format_exc())
 
     def user_exists(self, company_email, password):

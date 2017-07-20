@@ -6,12 +6,21 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
 
+         <div id="content">
+            {% if session['name'] %}
+            <p style="color:red;"> welcome :<strong>{{session['name']}}</strong></p>
+            {% else %}
+            You still didn't set your name, do it <a href="{{ url_for('form') }}">here</a>
+            {% endif %}
+
+           <strong class="got"><a href="{{ url_for('clearsession') }}">Logout</a></strong>
+<h4>PROJECT MANAGER</h4><br><br>
+            </div><br>
 <div class="container">
-<br>
-<h3>Welcome: Manager</h3>
 <br>
 
 
